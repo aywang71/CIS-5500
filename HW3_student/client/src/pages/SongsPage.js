@@ -85,7 +85,7 @@ export default function SongsPage() {
             control={<Checkbox checked={explicit} onChange={(e) => setExplicit(e.target.checked)} />}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={2.5}>
           <p>Duration</p>
           <Slider
             value={duration}
@@ -97,7 +97,7 @@ export default function SongsPage() {
             valueLabelFormat={value => <div>{formatDuration(value)}</div>}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={3}>
           <p>Plays (millions)</p>
           <Slider
             value={plays}
@@ -111,6 +111,39 @@ export default function SongsPage() {
         </Grid>
         {/* TODO (TASK 24): add sliders for danceability, energy, and valence (they should be all in the same row of the Grid) */}
         {/* Hint: consider what value xs should be to make them fit on the same row. Set max, min, and a reasonable step. Is valueLabelFormat is necessary? */}
+        <Grid item xs={2}>
+          <p>Danceability</p>
+          <Slider
+            value={danceability}
+            min={0}
+            max={1}
+            step={0.01}
+            onChange={(e, newValue) => setDanceability(newValue)}
+            valueLabelDisplay='auto'
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <p>Energy</p>
+          <Slider
+            value={energy}
+            min={0}
+            max={1}
+            step={0.01}
+            onChange={(e, newValue) => setEnergy(newValue)}
+            valueLabelDisplay='auto'
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <p>Valence</p>
+          <Slider
+            value={valence}
+            min={0}
+            max={1}
+            step={0.01}
+            onChange={(e, newValue) => setValence(newValue)}
+            valueLabelDisplay='auto'
+          />
+        </Grid>
       </Grid>
       <Button onClick={() => search() } style={{ left: '50%', transform: 'translateX(-50%)' }}>
         Search

@@ -94,7 +94,8 @@ export default function SongCard({ songId, handleClose }) {
                   <RadarChart outerRadius={90} width={730} height={250} data = {chartData}>
                     <PolarGrid />
                     <PolarAngleAxis dataKey = "name" />
-                    <Radar name="Song" dataKey="value" stroke='#8884d8' fill='#8884d8' fillOpacity={0.75}/>
+                    <PolarRadiusAxis angle = {90} domain = {[0,1]} />
+                    <Radar name="Song" dataKey="value" stroke='#8884d8' fill='#8884d8' fillOpacity={0.5}/>
                   </RadarChart>
                 </ResponsiveContainer>
               )

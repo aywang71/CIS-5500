@@ -85,7 +85,7 @@ export default function SongsPage() {
             control={<Checkbox checked={explicit} onChange={(e) => setExplicit(e.target.checked)} />}
           />
         </Grid>
-        <Grid item xs={2.5}>
+        <Grid item xs={6}>
           <p>Duration</p>
           <Slider
             value={duration}
@@ -97,7 +97,7 @@ export default function SongsPage() {
             valueLabelFormat={value => <div>{formatDuration(value)}</div>}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={6}>
           <p>Plays (millions)</p>
           <Slider
             value={plays}
@@ -111,7 +111,7 @@ export default function SongsPage() {
         </Grid>
         {/* TODO (TASK 24): add sliders for danceability, energy, and valence (they should be all in the same row of the Grid) */}
         {/* Hint: consider what value xs should be to make them fit on the same row. Set max, min, and a reasonable step. Is valueLabelFormat is necessary? */}
-        <Grid item xs={2}>
+        <Grid item xs={4}>
           <p>Danceability</p>
           <Slider
             value={danceability}
@@ -122,7 +122,7 @@ export default function SongsPage() {
             valueLabelDisplay='auto'
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={4}>
           <p>Energy</p>
           <Slider
             value={energy}
@@ -133,7 +133,7 @@ export default function SongsPage() {
             valueLabelDisplay='auto'
           />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={4}>
           <p>Valence</p>
           <Slider
             value={valence}

@@ -9,7 +9,7 @@ var answer_2 = db.prizes.aggregate([ { $match: { "category": "peace", "year": { 
 var answer_3 = db.laureates.aggregate([{$match: {$expr : {$eq :["$bornCountry", "$diedCountry"]}}}, {$project: {_id:0, firstname:"$firstname", surname:{$ifNull: ["$surname", ""]}, bornCountry:"$bornCountry"}}]);
 
 // Question 4
-var answer_4 = db.laureates.aggregate([ { $unwind: "$prizes" }, { $unwind: "$prizes.affiliations" }, { $group: { _id: "$prizes.affiliations.name", numberOfLaureates: { $sum: 1 } }}, { $project: { _id: 0, affiliationName: "$_id", numberOfLaureates: 1 }} ]);
+var answer_4 = db.laureates.aggregate([ { $unwind: "$prizes" }, { $unwind: "$prizes.affiliations" }, { $group: { _id: "$prizes.affiliations.name", numberOfLaureates: { $sum: 1 } }}, { $project: { _id: 0, affiliationName: "$_id", numberOfLaureates: 1 } }, { $sort: {affiliationName: 1 } } ]);
 
 // Question 5
 var answer_5 =  db.prizes.aggregate([ { $project: { year: 1, category: 1, sharedPrize: { $cond: { if: { $gt: [{ $size: "$laureates" }, 1] }, then: true, else: false } } } }, { $match: { sharedPrize: true } }, { $group: { _id: "$year", categoriesWithManyLaureates: { $sum: 1 } } }, { $sort: { categoriesWithManyLaureates: -1 } }, { $project: { year: "$_id", categoriesWithManyLaureates: 1, _id: 0 } } ]);

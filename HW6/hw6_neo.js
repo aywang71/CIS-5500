@@ -13,10 +13,10 @@ var answer_9 = `MATCH (c:City)-[:HAS_FLIGHT]->(n:Flight)-[:FLYING_TO]->(f:City) 
 var answer_10 = `MATCH p=(c:City {name: "Rome"})-[:HAS_FLIGHT]->(n:Flight)-[:FLYING_TO]->(f:City)-[:HAS_FLIGHT]->(m:Flight)-[:FLYING_TO]->(g:City) WITH f.name AS intermediate_city, g.name AS destination, n.duration AS first_duration, m.duration AS second_duration WHERE first_duration < 150 AND second_duration < 180 AND NOT destination = "Rome" return distinct intermediate_city, destination, first_duration, second_duration;`
 
 // Question 11
-var answer_11 = `MATCH p=(c:City {country: "United States of America"})-[:HAS_FLIGHT]->(n:Flight)-[:FLYING_TO]->(f:City) WHERE NOT f.country = "United States of America" AND n.departure >= 480 AND n.arrival <= 1020 return p;` //Not sure about some arrival/depature times
+var answer_11 = `MATCH p=(c:City {country: "United States of America"})-[:HAS_FLIGHT]->(n:Flight)-[:FLYING_TO]->(f:City) WHERE NOT f.country = "United States of America" AND n.departure >= 480 AND n.arrival < 1020 with f.name as name, avg(n.duration) as length order by length return name, length limit 5;`
 
 // Question 12
-var answer_12 = `MATCH p=(c:City {name: "New York"})-[:HAS_FLIGHT]->(n:Flight)-[:FLYING_TO]->(f:City)-[:HAS_FLIGHT]->(m:Flight)-[:FLYING_TO]->(g:City) WHERE g.name IN ["Athens","Madrid"] OR f.name IN ["London","Athens","Madrid"] return p;` //IN PROGRESS - cannot get count correct
+var answer_12 = `match p=shortestPath((c:City {name: "New York"})-[*]->(f:City)) WHERE f.name IN ["London", "Madrid", "Athens"] return f.name AS name, length(p)/2 AS length;`
 
 // DO NOT MODIFY BELOW THIS LINE
 module.exports =  { answer_7, answer_8, answer_9, answer_10, answer_11, answer_12 }
